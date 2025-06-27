@@ -14,6 +14,7 @@ class GanadoExportController extends Controller
 
     public function exportarFinca($destino)
     {
+        $destino = urldecode($destino); // Esto es clave si el nombre tiene espacios
         return Excel::download(new GanadosExport($destino), 'ganados-finca-'.$destino.'.xlsx');
     }
 }

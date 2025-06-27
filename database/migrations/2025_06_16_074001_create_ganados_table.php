@@ -19,7 +19,7 @@ return new class extends Migration
     $table->string('numero_subasta');
     $table->decimal('peso_total', 8, 2);
     $table->decimal('precio_kg', 8, 2);
-    $table->decimal('monto', 10, 2);
+    $table->decimal('monto', 15, 2);
     $table->string('lote');
     $table->string('destino');
     $table->string('rev1')->nullable();
@@ -28,6 +28,7 @@ return new class extends Migration
     $table->string('estado');
     $table->timestamps();
 });
+
 
     }
 

@@ -143,15 +143,7 @@
   <h2>Editar Ganado (Arete: {{ $ganado->arete }})</h2>
 
 
-    @if ($errors->any())
-        <div class="error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
 
     <form action="{{ route('ganados.update', $ganado->id) }}" method="POST">
         @csrf
@@ -296,5 +288,18 @@
         calcularAntiguedad();
     });
 </script>
+@if ($errors->has('arete'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar',
+                text: 'El número de arete ingresado ya está registrado. Por favor, ingrese uno diferente.',
+                confirmButtonText: 'Entendido'
+            });
+        });
+    </script>
+@endif
 
 @endsection

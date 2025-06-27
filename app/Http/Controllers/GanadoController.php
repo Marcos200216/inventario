@@ -32,10 +32,10 @@ class GanadoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'arete' => 'required|integer|min:1|unique:ganados,arete',
+            'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete',
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
-            'numero_subasta' => 'required|integer|min:1',
+            'numero_subasta' => 'required|string|regex:/^\d+$/',
             'peso_total' => 'required|numeric|min:0',
             'precio_kg' => 'required|integer|min:0',
             'monto' => 'nullable|string',
@@ -67,10 +67,10 @@ class GanadoController extends Controller
     public function update(Request $request, Ganado $ganado)
     {
         $validated = $request->validate([
-            'arete' => 'required|integer|min:1|unique:ganados,arete,' . $ganado->id,
+            'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete,' . $ganado->id,
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
-            'numero_subasta' => 'required|integer|min:1',
+            'numero_subasta' => 'required|string|regex:/^\d+$/',
             'peso_total' => 'required|numeric|min:0',
             'precio_kg' => 'required|numeric|min:0',
             'lote' => 'required|date',

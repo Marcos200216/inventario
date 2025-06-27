@@ -320,8 +320,9 @@ th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
       <!-- Botón Exportar Excel, ahora debajo de las summary-cards -->
     <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
 <a href="{{ route('ganados.exportar.finca', ['destino' => urlencode($finca->destino)]) }}" class="btn-exportar">
-            Exportar Excel
-        </a>
+    Exportar Excel
+</a>
+
     </div>
                         <div class="table-scroll-container">
     <table>

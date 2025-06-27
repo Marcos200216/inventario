@@ -551,7 +551,7 @@
         {{-- Arete (entero) --}}
         <div class="form-group">
             <label>Arete:</label>
-            <input type="number" name="arete" value="{{ old('arete') }}" min="1" step="1" required>
+         <input type="text" name="arete" value="{{ old('arete') }}" required pattern="\d+">
         </div>
 
       {{-- Sexo (select) --}}
@@ -574,7 +574,14 @@
         {{-- N° Subasta (entero) --}}
         <div class="form-group">
             <label>N° Subasta:</label>
-            <input type="number" name="numero_subasta" value="{{ old('numero_subasta') }}" min="1" step="1" required>
+<input 
+    type="text" 
+    name="numero_subasta" 
+    value="{{ old('numero_subasta') }}" 
+    required 
+    pattern="\d+"
+    title="Solo números"
+>
         </div>
 
         {{-- Peso Total (decimal) --}}
@@ -679,10 +686,10 @@
         $antiguedad = $fechaLote->diff($hoy);
     @endphp
     <tr>
-        <td>{{ number_format($ganado->arete, 0, ',', ' ') }}</td>
+        <td>{{ $ganado->arete }}</td>
         <td>{{ $ganado->sexo === 'masculino' ? 'M' : ($ganado->sexo === 'femenino' ? 'H' : '-') }}</td>
         <td>{{ $ganado->subasta }}</td>
-        <td>{{ number_format($ganado->numero_subasta, 0, ',', '.') }}</td>
+       <td>{{ $ganado->numero_subasta }}</td>
         <td>{{ number_format($ganado->peso_total, 2, ',', '.') }} kg</td>
         <td>₡{{ number_format($ganado->precio_kg, 0, ',', '.') }}</td>
         <td>₡{{ number_format($ganado->monto, 0, ',', '.') }}</td>

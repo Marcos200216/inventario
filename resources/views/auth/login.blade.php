@@ -271,13 +271,6 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <h1>Iniciar Sesión</h1>
-                
-                @if ($errors->any())
-                    <div class="error">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-                
                 <input type="email" name="email" placeholder="Correo electrónico" required />
                 <input type="password" name="password" placeholder="Contraseña" required />
                 <button type="submit">Ingresar</button>
@@ -407,6 +400,16 @@
 });
 
     });
+        
+    // Mostrar SweetAlert en caso de error de login
+    @if ($errors->has('email'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Credenciales incorrectas',
+            text: '{{ $errors->first('email') }}',
+            confirmButtonText: 'Aceptar'
+        });
+    @endif
 </script>
 </body>
 </html>
