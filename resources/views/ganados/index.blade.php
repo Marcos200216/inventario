@@ -82,7 +82,8 @@
     th, td {
         padding: 8px 5px;
         border: 1px solid #ddd;
-        text-align: left;
+            text-align: center !important; /* Centra el texto horizontalmente */
+    vertical-align: middle !important; /* Centra el contenido verticalmente */
         font-size: 12px;
         word-wrap: break-word;
         overflow: hidden;

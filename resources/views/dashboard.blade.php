@@ -204,19 +204,20 @@
 }
 
 .table-scroll-container {
-    max-height: calc(4 * 40px); /* altura para mostrar solo 4 filas antes del scroll */
+    max-height: calc(4 * 40px);
     overflow-y: auto;
     overflow-x: auto;
     position: relative;
     margin-top: 20px;
     border: 1px solid #ccc;
+    width: 100%; /* Asegura que use todo el ancho disponible */
 }
 
 table {
-    width: max-content; /* se adapta al contenido */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
     border-collapse: collapse;
-    font-size: 11px;     /* texto más pequeño */
-    table-layout: auto;
+    font-size: 12px;
+    table-layout: auto; /* Permite que las columnas se ajusten al contenido */
 }
 
 thead {
@@ -227,10 +228,12 @@ thead {
 
 th, td {
     border: 1px solid #ddd;
-    white-space: nowrap; /* evita que el texto se parta */
+    white-space: normal; /* Permite que el texto se ajuste */
+    word-wrap: break-word; /* Rompe palabras largas si es necesario */
      padding: 5px 8px; /* menos espacio interior */
     font-size: 11px;  /* texto más pequeño */
-    text-align: left;
+        text-align: center !important; /* Centra el texto horizontalmente */
+    vertical-align: middle !important; /* Centra el contenido verticalmente */
 }
 
 thead {
@@ -244,19 +247,17 @@ thead {
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-th:nth-child(1), td:nth-child(1) { width: 20px; } /* Arete */
-th:nth-child(2), td:nth-child(2) { width: 30px; } /* Sexo */
-th:nth-child(3), td:nth-child(3) { width: 35px; } /* Subasta */
-th:nth-child(4), td:nth-child(4) { width: 50px; } /* N° Subasta */
-th:nth-child(5), td:nth-child(5) { width: 50px; } /* Peso */
-th:nth-child(6), td:nth-child(6) { width: 50px; } /* Precio/Kg */
-th:nth-child(7), td:nth-child(7) { width: 55px; } /* Monto */
-th:nth-child(8), td:nth-child(8) { width: 50px; } /* Lote */
-th:nth-child(9), td:nth-child(9) { width: 70px; } /* Antigüedad */
-th:nth-child(10), td:nth-child(10) { width: 30px; } /* Rev 1 */
-th:nth-child(11), td:nth-child(11) { width: 30px; } /* Rev 2 */
-th:nth-child(12), td:nth-child(12) { width: 30px; } /* Rev 3 */
-th:nth-child(13), td:nth-child(13) { width: 30px; } /* Estado */
+th:nth-child(1), td:nth-child(1) { width: 30px; }  /* Arete */
+th:nth-child(3), td:nth-child(3) { width: 80px; }  /* Subasta */
+th:nth-child(5), td:nth-child(5) { width: 90px; }  /* Peso */
+th:nth-child(6), td:nth-child(6) { width: 90px; }  /* Precio/Kg */
+th:nth-child(7), td:nth-child(7) { width: 100px; } /* Monto */
+th:nth-child(8), td:nth-child(8) { width: 90px; }  /* Lote */
+th:nth-child(9), td:nth-child(9) { width: 150px; } /* Antigüedad */
+th:nth-child(10), td:nth-child(10) { width: 80px; } /* Rev 1 */
+th:nth-child(11), td:nth-child(11) { width: 80px; } /* Rev 2 */
+th:nth-child(12), td:nth-child(12) { width: 80px; } /* Rev 3 */
+th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
 
 
 </style>
@@ -283,34 +284,39 @@ th:nth-child(13), td:nth-child(13) { width: 30px; } /* Estado */
                     </div>
 
                     @php
-                        $ganadosFinca = $ganados->where('destino', $finca->destino);
-                        $totalAnimales = $ganadosFinca->count();
-                        $totalPeso = $ganadosFinca->sum('peso_total');
-                        $montoTotal = $ganadosFinca->sum('monto');
-                        $pesoPromedio = $totalAnimales > 0 ? $totalPeso / $totalAnimales : 0;
-                    @endphp
+    $ganadosFinca = $ganados->where('destino', $finca->destino);
+    $totalAnimales = $ganadosFinca->count();
+    $totalPeso = $ganadosFinca->sum('peso_total');
+    $montoTotal = $ganadosFinca->sum('monto');
+
+    $pesoPromedio = $totalAnimales > 0 ? $totalPeso / $totalAnimales : 0;
+    $precioPromedio = $totalPeso > 0 ? $montoTotal / $totalPeso : 0;
+    $valorPorAnimal = $totalAnimales > 0 ? $montoTotal / $totalAnimales : 0;
+@endphp
+
 
                     @if($totalAnimales > 0)
                      <!-- Botón Exportar Excel -->
          
-                        <div class="summary-cards">
-                            <div class="summary-card">
-                                <strong>Total de animales:</strong>
-                                {{ $totalAnimales }}
-                            </div>
-                            <div class="summary-card">
-                                <strong>Total peso:</strong>
-                                {{ number_format($totalPeso, 2) }} kg
-                            </div>
-                            <div class="summary-card">
-                                <strong>Monto total:</strong>
-                                ₡{{ number_format($montoTotal, 0) }}
-                            </div>
-                            <div class="summary-card">
-                                <strong>Peso promedio:</strong>
-                                {{ number_format($pesoPromedio, 2) }} kg
-                            </div>
-                        </div>
+      <div class="summary-cards">
+    <div class="summary-card">
+        <strong>Total de animales:</strong>
+        {{ $totalAnimales }}
+    </div>
+    <div class="summary-card">
+        <strong>Peso promedio:</strong>
+        {{ number_format($pesoPromedio, 2) }} kg
+    </div>
+    <div class="summary-card">
+        <strong>Valor por animal:</strong>
+        ₡{{ number_format($valorPorAnimal, 0) }}
+    </div>
+    <div class="summary-card">
+        <strong>Precio promedio:</strong>
+        ₡{{ number_format($precioPromedio, 2) }}
+    </div>
+</div>
+
       <!-- Botón Exportar Excel, ahora debajo de las summary-cards -->
     <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
 <a href="{{ route('ganados.exportar.finca', ['destino' => urlencode($finca->destino)]) }}" class="btn-exportar">
