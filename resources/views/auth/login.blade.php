@@ -347,64 +347,65 @@
             container.classList.remove('right-panel-active');
         });
 
-        registerButton.addEventListener('click', async (e) => {
-            e.preventDefault();
-            
-            // Obtener el token CSRF de manera segura
-            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
-            
-            if (!csrfToken) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'No se pudo verificar la seguridad de la solicitud',
-                    icon: 'error'
-                });
-                return;
-            }
+       registerButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+    
+    if (!csrfToken) {
+        Swal.fire({
+            title: 'Error',
+            text: 'No se pudo verificar la seguridad de la solicitud',
+            icon: 'error'
+        });
+        return;
+    }
 
-            try {
-                const formData = new FormData(registerForm);
-                const response = await fetch(registerForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': csrfToken
-                    }
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok && data.success) {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: data.message || 'Registro exitoso. Por favor inicia sesión.',
-                        icon: 'success'
-                    }).then(() => {
-                        container.classList.remove('right-panel-active');
-                        registerForm.reset();
-                    });
-                } else {
-                    let errorMessage = data.message || 'Error en el registro';
-                    if (data.errors) {
-                        errorMessage = Object.values(data.errors).join('\n');
-                    }
-                    Swal.fire({
-                        title: 'Error',
-                        text: errorMessage,
-                        icon: 'error'
-                    });
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Error de conexión con el servidor',
-                    icon: 'error'
-                });
+    try {
+        const formData = new FormData(registerForm);
+        // Aquí cambias registerForm.action por la ruta relativa '/register'
+        const response = await fetch('/register', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': csrfToken
             }
         });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message || 'Registro exitoso. Por favor inicia sesión.',
+                icon: 'success'
+            }).then(() => {
+                container.classList.remove('right-panel-active');
+                registerForm.reset();
+            });
+        } else {
+            let errorMessage = data.message || 'Error en el registro';
+            if (data.errors) {
+                errorMessage = Object.values(data.errors).join('\n');
+            }
+            Swal.fire({
+                title: 'Error',
+                text: errorMessage,
+                icon: 'error'
+            });
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'Error de conexión con el servidor',
+            icon: 'error'
+        });
+    }
+});
+
     });
 </script>
 </body>
