@@ -403,6 +403,7 @@
         
     // Mostrar SweetAlert en caso de error de login
     @if ($errors->has('email'))
+    
         Swal.fire({
             icon: 'error',
             title: 'Credenciales incorrectas',
