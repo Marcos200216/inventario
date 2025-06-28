@@ -13,8 +13,7 @@ return new class extends Migration
     {
        Schema::create('ganados', function (Blueprint $table) {
     $table->id();
-    $table->string('arete')->unique();
-    $table->string('color'); 
+    $table->string('arete')->unique(); 
     $table->string('sexo');
     $table->string('subasta');
     $table->string('numero_subasta');
