@@ -95,23 +95,23 @@
         height: 40px;
     }
 
-    /* Ajustes específicos de ancho para columnas */
-    th:nth-child(1), td:nth-child(1) { width: 5%; }   /* Arete */
-    th:nth-child(2), td:nth-child(2) { width: 3%; }   /* Sexo */
-    th:nth-child(3), td:nth-child(3) { width: 7%; }   /* Subasta */
-    th:nth-child(4), td:nth-child(4) { width: 5%; }   /* N° Subasta */
-    th:nth-child(5), td:nth-child(5) { width: 6%; }   /* Peso Total */
-    th:nth-child(6), td:nth-child(6) { width: 6%; }   /* Precio/Kg */
-    th:nth-child(7), td:nth-child(7) { width: 6%; }   /* Monto */
-    th:nth-child(8), td:nth-child(8) { width: 6%; }   /* Lote */
-    th:nth-child(9), td:nth-child(9) { width: 8%; }   /* Antigüedad */
-    th:nth-child(10), td:nth-child(10) { width: 6%; } /* Destino */
-    th:nth-child(11), td:nth-child(11) { width: 6%; } /* Rev 1 */
-    th:nth-child(12), td:nth-child(12) { width: 6%; } /* Rev 2 */
-    th:nth-child(13), td:nth-child(13) { width: 6%; } /* Rev 3 */
-    th:nth-child(14), td:nth-child(14) { width: 6%; } /* Estado */
-    th:nth-child(15), td:nth-child(15) { width: 5%; min-width: 60px; } /* Acciones */
-
+       /* Ajustes específicos de ancho para columnas */
+th:nth-child(1), td:nth-child(1) { width: 5%; }   /* Arete */
+th:nth-child(2), td:nth-child(2) { width: 4%; }   /* Color */
+th:nth-child(3), td:nth-child(3) { width: 3%; }   /* Sexo */
+th:nth-child(4), td:nth-child(4) { width: 7%; }   /* Subasta */
+th:nth-child(5), td:nth-child(5) { width: 5%; }   /* N° Subasta */
+th:nth-child(6), td:nth-child(6) { width: 6%; }   /* Peso Total */
+th:nth-child(7), td:nth-child(7) { width: 6%; }   /* Precio/Kg */
+th:nth-child(8), td:nth-child(8) { width: 6%; }   /* Monto */
+th:nth-child(9), td:nth-child(9) { width: 6%; }   /* Lote */
+th:nth-child(10), td:nth-child(10) { width: 8%; }  /* Antigüedad */
+th:nth-child(11), td:nth-child(11) { width: 6%; }  /* Destino */
+th:nth-child(12), td:nth-child(12) { width: 6%; }  /* Rev 1 */
+th:nth-child(13), td:nth-child(13) { width: 6%; }  /* Rev 2 */
+th:nth-child(14), td:nth-child(14) { width: 6%; }  /* Rev 3 */
+th:nth-child(15), td:nth-child(15) { width: 7%; }  /* Estado */
+th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones */
 
     /* Para mostrar el texto completo al pasar el mouse */
     td:hover {
@@ -129,7 +129,7 @@
     }
 
     /* Estilos para la columna de Acciones */
-    td:nth-child(15) {
+    td:nth-child(16) {
         padding: 4px !important; /* Reducir el padding */
         white-space: normal !important; /* Permitir múltiples líneas */
     }
@@ -160,8 +160,8 @@
     }
     
     /* Asegurar que la columna tenga suficiente ancho */
-    th:nth-child(15),
-    td:nth-child(15) {
+    th:nth-child(16),
+    td:nth-child(16) {
         width: 120px !important; /* Ancho fijo suficiente */
         min-width: 120px;
         max-width: 120px;
@@ -553,7 +553,10 @@
             <label>Arete:</label>
          <input type="text" name="arete" value="{{ old('arete') }}" required pattern="\d+">
         </div>
-
+   {{-- Color (texto) --}}
+<div class="form-group">
+    <label>Color:</label>
+<input type="text" name="color" value="{{ old('color') }}" required></div>
       {{-- Sexo (select) --}}
 <div class="form-group">
     <label>Sexo:</label>
@@ -663,6 +666,7 @@
             <thead>
                 <tr>
                     <th>Arete</th>
+                    <th>Color</th>
                     <th>Sexo</th>
                     <th>Subasta</th>
                     <th>N° Subasta</th>
@@ -688,6 +692,7 @@
     @endphp
     <tr>
         <td>{{ $ganado->arete }}</td>
+        <td>{{ $ganado->color }}</td>
         <td>{{ $ganado->sexo === 'masculino' ? 'M' : ($ganado->sexo === 'femenino' ? 'H' : '-') }}</td>
         <td>{{ $ganado->subasta }}</td>
        <td>{{ $ganado->numero_subasta }}</td>

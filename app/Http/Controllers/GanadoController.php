@@ -33,6 +33,7 @@ class GanadoController extends Controller
     {
         $validated = $request->validate([
             'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete',
+            'color' => 'required|string|max:50', // 🆕
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
             'numero_subasta' => 'required|string|regex:/^\d+$/',
@@ -68,6 +69,7 @@ class GanadoController extends Controller
     {
         $validated = $request->validate([
             'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete,' . $ganado->id,
+            'color' => 'required|string|max:50', // 🆕
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
             'numero_subasta' => 'required|string|regex:/^\d+$/',

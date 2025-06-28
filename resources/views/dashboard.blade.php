@@ -4,7 +4,7 @@
 <style>
     .dashboard-container {
         max-width: 95%;
-        margin: 40px auto;
+     margin-top: 0px;
         padding: 20px;
     }
 
@@ -248,16 +248,19 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 th:nth-child(1), td:nth-child(1) { width: 30px; }  /* Arete */
-th:nth-child(3), td:nth-child(3) { width: 80px; }  /* Subasta */
-th:nth-child(5), td:nth-child(5) { width: 90px; }  /* Peso */
-th:nth-child(6), td:nth-child(6) { width: 90px; }  /* Precio/Kg */
-th:nth-child(7), td:nth-child(7) { width: 100px; } /* Monto */
-th:nth-child(8), td:nth-child(8) { width: 90px; }  /* Lote */
-th:nth-child(9), td:nth-child(9) { width: 150px; } /* Antigüedad */
-th:nth-child(10), td:nth-child(10) { width: 80px; } /* Rev 1 */
-th:nth-child(11), td:nth-child(11) { width: 80px; } /* Rev 2 */
-th:nth-child(12), td:nth-child(12) { width: 80px; } /* Rev 3 */
-th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
+th:nth-child(2), td:nth-child(2) { width: 50px; }  /* Color */
+th:nth-child(3), td:nth-child(3) { width: 30px; }  /* Sexo */
+th:nth-child(4), td:nth-child(4) { width: 80px; }  /* Subasta */
+th:nth-child(5), td:nth-child(5) { width: 50px; }  /* N° Subasta */
+th:nth-child(6), td:nth-child(6) { width: 90px; }  /* Peso */
+th:nth-child(7), td:nth-child(7) { width: 90px; }  /* Precio/Kg */
+th:nth-child(8), td:nth-child(8) { width: 100px; } /* Monto */
+th:nth-child(9), td:nth-child(9) { width: 90px; }  /* Lote */
+th:nth-child(10), td:nth-child(10) { width: 150px; } /* Antigüedad */
+th:nth-child(11), td:nth-child(11) { width: 80px; } /* Rev 1 */
+th:nth-child(12), td:nth-child(12) { width: 80px; } /* Rev 2 */
+th:nth-child(13), td:nth-child(13) { width: 80px; } /* Rev 3 */
+th:nth-child(14), td:nth-child(14) { width: 100px; } /* Estado */
 
 
 </style>
@@ -329,6 +332,7 @@ th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
         <thead>
             <tr>
                 <th>Arete</th>
+                <th>Color</th>  <!-- Nueva columna -->
                 <th>Sexo</th>
                 <th>Subasta</th>
                 <th>N° Subasta</th>
@@ -352,6 +356,7 @@ th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
         @endphp
         <tr>
             <td>{{ $ganado->arete }}</td>
+             <td>{{ $ganado->color }}</td>  <!-- Mostrar color -->
             <td>{{ $ganado->sexo === 'masculino' ? 'M' : ($ganado->sexo === 'femenino' ? 'H' : '-') }}</td>
             <td>{{ $ganado->subasta }}</td>
             <td>{{ $ganado->numero_subasta }}</td>

@@ -26,7 +26,7 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
     public function collection()
     {
         $query = Ganado::query()->select([
-            'arete', 'sexo', 'subasta', 'numero_subasta',
+            'arete', 'color', 'sexo', 'subasta', 'numero_subasta',
             'peso_total', 'precio_kg', 'monto', 'lote', 'destino',
             'rev1', 'rev2', 'rev3', 'estado'
         ]);
@@ -41,7 +41,7 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
     public function headings(): array
     {
         return [
-            'Arete', 'Sexo', 'Subasta', 'N° Subasta',
+            'Arete', 'Color', 'Sexo', 'Subasta', 'N° Subasta',
             'Peso Total', 'Precio por Kg', 'Monto', 'Lote', 'Antigüedad',
             'Destino', 'Revisión 1', 'Revisión 2', 'Revisión 3', 'Estado'
         ];
@@ -51,19 +51,20 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
     {
         return [
             'A' => 10,   // Arete
-            'B' => 10,   // Sexo
-            'C' => 14,   // Subasta
-            'D' => 12,   // N° Subasta
-            'E' => 14,   // Peso Total
-            'F' => 14,   // Precio por Kg
-            'G' => 16,   // Monto
-            'H' => 14,   // Lote
-            'I' => 18,   // Antigüedad
-            'J' => 14,   // Destino
-            'K' => 14,   // Rev 1
-            'L' => 14,   // Rev 2
-            'M' => 14,   // Rev 3
-            'N' => 12    // Estado
+            'B' => 15,   // Color (ancho ajustado)
+            'C' => 10,   // Sexo
+            'D' => 14,   // Subasta
+            'E' => 12,   // N° Subasta
+            'F' => 14,   // Peso Total
+            'G' => 14,   // Precio por Kg
+            'H' => 16,   // Monto
+            'I' => 14,   // Lote
+            'J' => 18,   // Antigüedad
+            'K' => 14,   // Destino
+            'L' => 14,   // Rev 1
+            'M' => 14,   // Rev 2
+            'N' => 14,   // Rev 3
+            'O' => 12    // Estado
         ];
     }
 
@@ -76,6 +77,7 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
 
         return [
             $ganado->arete,
+            $ganado->color,  // Nueva columna Color
             $ganado->sexo === 'masculino' ? 'Macho' : 'Hembra',
             $ganado->subasta,
             $ganado->numero_subasta,
@@ -93,36 +95,42 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
     }
 
     public function registerEvents(): array
-    {
-        return [
-            AfterSheet::class => function (AfterSheet $event) {
-                $sheet = $event->sheet;
+{
+    return [
+        AfterSheet::class => function (AfterSheet $event) {
+            $sheet = $event->sheet;
 
-                // Estilo encabezado
-                $sheet->getStyle('A1:N1')->applyFromArray([
-                    'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
-                    'fill' => ['fillType' => 'solid', 'startColor' => ['rgb' => '087282']],
-                    'alignment' => ['horizontal' => 'center'],
-                ]);
+            $highestRow = $sheet->getHighestRow();
+            $highestCol = $sheet->getHighestColumn();
 
-                // Filtros automáticos en encabezado
-                $sheet->setAutoFilter('A1:N1');
+            // Estilo encabezado (ya centrado)
+            $sheet->getStyle('A1:O1')->applyFromArray([
+                'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+                'fill' => ['fillType' => 'solid', 'startColor' => ['rgb' => '087282']],
+                'alignment' => ['horizontal' => 'center'],
+            ]);
 
-                // Congelar primera fila
-                $sheet->freezePane('A2');
+            // Filtros automáticos en encabezado
+            $sheet->setAutoFilter('A1:O1');
 
-                // Bordes en toda la tabla
-                $highestRow = $sheet->getHighestRow();
-                $highestCol = $sheet->getHighestColumn();
-                $sheet->getStyle("A1:{$highestCol}{$highestRow}")->applyFromArray([
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
+            // Congelar primera fila
+            $sheet->freezePane('A2');
+
+            // Bordes en toda la tabla
+            $sheet->getStyle("A1:{$highestCol}{$highestRow}")->applyFromArray([
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['rgb' => '000000'],
                     ],
-                ]);
-            }
-        ];
-    }
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+            ]);
+        }
+    ];
+}
+
 }

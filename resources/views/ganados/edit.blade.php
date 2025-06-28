@@ -154,7 +154,10 @@
                 <label>Arete:</label>
                 <input type="number" name="arete" value="{{ old('arete', $ganado->arete) }}" min="1" step="1" required>
             </div>
-
+                <div class="form-group">
+    <label>Color:</label>
+    <input type="text" name="color" value="{{ old('color', $ganado->color) }}" required maxlength="50">
+</div>
             <div class="form-group">
                 <label>Sexo:</label>
                 <select name="sexo" required>
