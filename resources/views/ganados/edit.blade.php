@@ -156,7 +156,7 @@
             </div>
                 <div class="form-group">
     <label>Color:</label>
-    <input type="text" name="color" value="{{ old('color', $ganado->color) }}" required maxlength="50">
+<input type="text" name="color" value="{{ old('color', $ganado->color) }}" maxlength="50">
 </div>
             <div class="form-group">
                 <label>Sexo:</label>

@@ -556,7 +556,8 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
    {{-- Color (texto) --}}
 <div class="form-group">
     <label>Color:</label>
-<input type="text" name="color" value="{{ old('color') }}" required></div>
+<input type="text" name="color" value="{{ old('color') }}">
+</div>
       {{-- Sexo (select) --}}
 <div class="form-group">
     <label>Sexo:</label>
