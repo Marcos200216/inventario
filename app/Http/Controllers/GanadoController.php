@@ -44,7 +44,7 @@ class GanadoController extends Controller
             'rev1' => 'nullable|date',
             'rev2' => 'nullable|date',
             'rev3' => 'nullable|date',
-            'estado' => 'required|in:Vendido,Muerto,Robado',
+            'estado' => 'required|in:Vendido,Muerto,Robado,En Finca',
         ]);
 
         $validated['monto'] = $validated['peso_total'] * $validated['precio_kg'];
@@ -78,7 +78,7 @@ class GanadoController extends Controller
             'rev1' => 'nullable|date',
             'rev2' => 'nullable|date',
             'rev3' => 'nullable|date',
-            'estado' => 'required|in:Vendido,Muerto,Robado', 
+            'estado' => 'required|in:Vendido,Muerto,Robado,En Finca',
         ]);
 
         $validated['monto'] = $validated['peso_total'] * $validated['precio_kg'];

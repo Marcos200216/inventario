@@ -645,6 +645,7 @@
         <option value="Vendido" {{ old('estado') == 'Vendido' ? 'selected' : '' }}>Vendido</option>
         <option value="Muerto" {{ old('estado') == 'Muerto' ? 'selected' : '' }}>Muerto</option>
         <option value="Robado" {{ old('estado') == 'Robado' ? 'selected' : '' }}>Robado</option>
+        <option value="En Finca" {{ old('estado') == 'En Finca' ? 'selected' : '' }}>En Finca</option>
     </select>
 </div>
 
@@ -703,7 +704,8 @@
     color:
         {{ $ganado->estado == 'Vendido' ? 'green' :
            ($ganado->estado == 'Muerto' ? 'red' :
-           ($ganado->estado == 'Robado' ? 'orange' : 'black')) }};
+           ($ganado->estado == 'Robado' ? 'orange' :
+           ($ganado->estado == 'En Finca' ? '#6f42c1' : 'black'))) }};
 ">
     @switch($ganado->estado)
         @case('Vendido')
@@ -716,6 +718,10 @@
 
         @case('Robado')
             ⚠️ Robado
+            @break
+
+        @case('En Finca')
+            🏡 En Finca
             @break
 
         @default

@@ -10,7 +10,8 @@
 @foreach ($dataPorFinca as $finca => $data)
     @php
         $slug = Str::slug($finca, '_');
-        $estadosBase = ['Vendido' => 0, 'Muerto' => 0, 'Robado' => 0];
+        // Agregamos "En Finca" al arreglo base para que siempre esté presente
+        $estadosBase = ['Vendido' => 0, 'Muerto' => 0, 'Robado' => 0, 'En Finca' => 0];
         $estadoCountCompleto = array_merge($estadosBase, $data['estadoCount']);
     @endphp
 
@@ -45,7 +46,7 @@
     @foreach ($dataPorFinca as $finca => $data)
         @php
             $slug = Str::slug($finca, '_');
-            $estadoCountCompleto = array_merge(['Vendido' => 0, 'Muerto' => 0, 'Robado' => 0], $data['estadoCount']);
+            $estadoCountCompleto = array_merge(['Vendido' => 0, 'Muerto' => 0, 'Robado' => 0, 'En Finca' => 0], $data['estadoCount']);
         @endphp
 
         const ctxRegistro_{{ $slug }} = document.getElementById('registroPorMes_{{ $slug }}').getContext('2d');
@@ -70,10 +71,11 @@
         const estadoLabels_{{ $slug }} = Object.keys(@json($estadoCountCompleto));
         const estadoData_{{ $slug }} = Object.values(@json($estadoCountCompleto));
         const estadoColors_{{ $slug }} = estadoLabels_{{ $slug }}.map(estado => {
-            if (estado === 'Vendido') return '#28a745';
-            if (estado === 'Muerto') return '#dc3545';
-            if (estado === 'Robado') return '#f0ad4e';
-            return '#6c757d';
+            if (estado === 'Vendido') return '#28a745';     // verde
+            if (estado === 'Muerto') return '#dc3545';      // rojo
+            if (estado === 'Robado') return '#f0ad4e';      // naranja
+            if (estado === 'En Finca') return '#6f42c1';    // morado oscuro
+            return '#6c757d'; // gris por defecto
         });
 
         new Chart(ctxEstado_{{ $slug }}, {

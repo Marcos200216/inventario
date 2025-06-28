@@ -219,16 +219,16 @@
                 <input type="date" name="rev3" value="{{ old('rev3', $ganado->rev3) }}">
             </div>
 
-            <div class="form-group">
-                <label>Estado:</label>
-                <select name="estado" required>
-                    <option value="">Seleccione estado</option>
-                    <option value="Vendido" {{ old('estado', $ganado->estado) == 'Vendido' ? 'selected' : '' }}>Vendido</option>
-                    <option value="Muerto" {{ old('estado', $ganado->estado) == 'Muerto' ? 'selected' : '' }}>Muerto</option>
-                    <option value="Robado" {{ old('estado', $ganado->estado) == 'Robado' ? 'selected' : '' }}>Robado</option>
-
-                </select>
-            </div>
+              <div class="form-group">
+    <label>Estado:</label>
+    <select name="estado" required>
+        <option value="">Seleccione estado</option>
+        <option value="Vendido" {{ old('estado', $ganado->estado) == 'Vendido' ? 'selected' : '' }}>Vendido</option>
+        <option value="Muerto" {{ old('estado', $ganado->estado) == 'Muerto' ? 'selected' : '' }}>Muerto</option>
+        <option value="Robado" {{ old('estado', $ganado->estado) == 'Robado' ? 'selected' : '' }}>Robado</option>
+        <option value="En Finca" {{ old('estado', $ganado->estado) == 'En Finca' ? 'selected' : '' }}>En Finca</option>
+    </select>
+</div>
         </div>
 
         <div style="grid-column: span 3; display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px;">

@@ -367,7 +367,8 @@ th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
     color:
         {{ $ganado->estado == 'Vendido' ? 'green' :
            ($ganado->estado == 'Muerto' ? 'red' :
-           ($ganado->estado == 'Robado' ? 'orange' : 'black')) }};
+           ($ganado->estado == 'Robado' ? 'orange' :
+           ($ganado->estado == 'En Finca' ? '#6f42c1' : 'black'))) }};
 ">
     @switch($ganado->estado)
         @case('Vendido')
@@ -380,6 +381,10 @@ th:nth-child(13), td:nth-child(13) { width: 90px; } /* Estado */
 
         @case('Robado')
             ⚠️ Robado
+            @break
+
+        @case('En Finca')
+            🏡 En Finca
             @break
 
         @default
