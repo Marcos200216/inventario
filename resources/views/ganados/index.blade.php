@@ -95,7 +95,7 @@
         height: 40px;
     }
 
-    /* Ajustes específicos de ancho para columnas */
+       /* Ajustes específicos de ancho para columnas */
 th:nth-child(1), td:nth-child(1) { width: 5%; }   /* Arete */
 th:nth-child(2), td:nth-child(2) { width: 4%; }   /* Color */
 th:nth-child(3), td:nth-child(3) { width: 3%; }   /* Sexo */
@@ -112,7 +112,6 @@ th:nth-child(13), td:nth-child(13) { width: 6%; }  /* Rev 2 */
 th:nth-child(14), td:nth-child(14) { width: 6%; }  /* Rev 3 */
 th:nth-child(15), td:nth-child(15) { width: 7%; }  /* Estado */
 th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones */
-
 
     /* Para mostrar el texto completo al pasar el mouse */
     td:hover {
@@ -552,12 +551,13 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
         {{-- Arete (entero) --}}
         <div class="form-group">
             <label>Arete:</label>
-            <input type="text" name="arete" value="{{ old('arete') }}" required pattern="\d+">
+         <input type="text" name="arete" value="{{ old('arete') }}" required pattern="\d+">
         </div>
-        {{-- Color (texto) --}}
+   {{-- Color (texto) --}}
 <div class="form-group">
     <label>Color:</label>
-<input type="text" name="color" value="{{ old('color') }}" required></div>
+<input type="text" name="color" value="{{ old('color') }}">
+</div>
       {{-- Sexo (select) --}}
 <div class="form-group">
     <label>Sexo:</label>
@@ -621,7 +621,8 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
             <label>Destino:</label>
             <input type="text" name="destino" value="{{ old('destino') }}" required>
         </div>
-{{-- Peso 1 --}}
+
+     {{-- Peso 1 --}}
 <div class="form-group">
     <label>Peso 1 (kg):</label>
     <input type="number" name="peso1" value="{{ old('peso1') }}" step="0.01" min="0" class="form-control">
@@ -638,8 +639,6 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
     <label>Peso 3 (kg):</label>
     <input type="number" name="peso3" value="{{ old('peso3') }}" step="0.01" min="0" class="form-control">
 </div>
-
-
         {{-- Estado (select) --}}
 {{-- Estado (select) --}}
 <div class="form-group">
@@ -652,7 +651,6 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
         <option value="En Finca" {{ old('estado') == 'En Finca' ? 'selected' : '' }}>En Finca</option>
     </select>
 </div>
-
 
 
     </div>
@@ -693,12 +691,11 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
         $antiguedad = $fechaLote->diff($hoy);
     @endphp
     <tr>
-<td>{{ $ganado->arete }}</td>
-<td>{{ $ganado->color }}</td>
-
+        <td>{{ $ganado->arete }}</td>
+        <td>{{ $ganado->color }}</td>
         <td>{{ $ganado->sexo === 'masculino' ? 'M' : ($ganado->sexo === 'femenino' ? 'H' : '-') }}</td>
         <td>{{ $ganado->subasta }}</td>
-        <td>{{ $ganado->numero_subasta }}</td>
+       <td>{{ $ganado->numero_subasta }}</td>
         <td>{{ number_format($ganado->peso_total, 2, ',', '.') }} kg</td>
         <td>₡{{ number_format($ganado->precio_kg, 0, ',', '.') }}</td>
         <td>₡{{ number_format($ganado->monto, 0, ',', '.') }}</td>
@@ -708,8 +705,6 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
         <td>{{ $ganado->peso1 !== null ? number_format($ganado->peso1, 2, ',', '.') . ' kg' : '' }}</td>
 <td>{{ $ganado->peso2 !== null ? number_format($ganado->peso2, 2, ',', '.') . ' kg' : '' }}</td>
 <td>{{ $ganado->peso3 !== null ? number_format($ganado->peso3, 2, ',', '.') . ' kg' : '' }}</td>
-
-
         <td style="
     color:
         {{ $ganado->estado == 'Vendido' ? 'green' :
@@ -738,7 +733,6 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
             {{ $ganado->estado }}
     @endswitch
 </td>
-
 
 
 
