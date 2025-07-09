@@ -97,7 +97,7 @@
 
        /* Ajustes específicos de ancho para columnas */
 th:nth-child(1), td:nth-child(1) { width: 5%; }   /* Arete */
-th:nth-child(2), td:nth-child(2) { width: 4%; }   /* Color */
+th:nth-child(2), td:nth-child(2) { width: 6%; }   /* Color */
 th:nth-child(3), td:nth-child(3) { width: 3%; }   /* Sexo */
 th:nth-child(4), td:nth-child(4) { width: 7%; }   /* Subasta */
 th:nth-child(5), td:nth-child(5) { width: 5%; }   /* N° Subasta */
