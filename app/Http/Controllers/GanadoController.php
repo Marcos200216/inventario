@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Ganado;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-
 use App\Exports\GanadosExport;
-class GanadoController extends Controller
 
+class GanadoController extends Controller
 {
     public function index(Request $request)
     {
         $query = Ganado::query();
 
-        // Filtro por arete si se proporciona
         if ($request->filled('arete')) {
             $query->where('arete', $request->arete);
         }
@@ -33,7 +31,7 @@ class GanadoController extends Controller
     {
         $validated = $request->validate([
             'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete',
-            'color' => 'nullable|string|max:50',
+            'color' => 'required|string|max:50',
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
             'numero_subasta' => 'required|string|regex:/^\d+$/',
@@ -42,9 +40,9 @@ class GanadoController extends Controller
             'monto' => 'nullable|string',
             'lote' => 'required|date',
             'destino' => 'required|string|max:100',
-            'rev1' => 'nullable|date',
-            'rev2' => 'nullable|date',
-            'rev3' => 'nullable|date',
+            'peso1' => 'nullable|numeric|min:0',
+            'peso2' => 'nullable|numeric|min:0',
+            'peso3' => 'nullable|numeric|min:0',
             'estado' => 'required|in:Vendido,Muerto,Robado,En Finca',
         ]);
 
@@ -69,7 +67,7 @@ class GanadoController extends Controller
     {
         $validated = $request->validate([
             'arete' => 'required|string|regex:/^\d+$/|unique:ganados,arete,' . $ganado->id,
-            'color' => 'nullable|string|max:50',
+            'color' => 'required|string|max:50',
             'sexo' => 'required|in:masculino,femenino',
             'subasta' => 'required|string|max:100',
             'numero_subasta' => 'required|string|regex:/^\d+$/',
@@ -77,9 +75,9 @@ class GanadoController extends Controller
             'precio_kg' => 'required|numeric|min:0',
             'lote' => 'required|date',
             'destino' => 'required|string|max:100',
-            'rev1' => 'nullable|date',
-            'rev2' => 'nullable|date',
-            'rev3' => 'nullable|date',
+            'peso1' => 'nullable|numeric|min:0',
+            'peso2' => 'nullable|numeric|min:0',
+            'peso3' => 'nullable|numeric|min:0',
             'estado' => 'required|in:Vendido,Muerto,Robado,En Finca',
         ]);
 
@@ -97,7 +95,7 @@ class GanadoController extends Controller
     }
 
     public function exportar()
-{
-    return Excel::download(new GanadosExport, 'ganados.xlsx');
-}
+    {
+        return Excel::download(new GanadosExport, 'ganados.xlsx');
+    }
 }

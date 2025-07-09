@@ -8,6 +8,6 @@ class Ganado extends Model
 {
     protected $fillable = [
         'arete', 'color', 'sexo', 'subasta', 'numero_subasta', 'peso_total',
-        'precio_kg', 'monto', 'lote', 'destino', 'rev1', 'rev2', 'rev3', 'estado'
+        'precio_kg', 'monto', 'lote', 'destino', 'peso', 'peso2', 'peso3', 'estado'
     ];
 }

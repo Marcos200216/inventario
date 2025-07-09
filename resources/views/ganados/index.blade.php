@@ -622,24 +622,23 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
             <input type="text" name="destino" value="{{ old('destino') }}" required>
         </div>
 
-        {{-- Rev1 (fecha) --}}
-        <div class="form-group">
-            <label>Rev1:</label>
-            <input type="date" name="rev1" value="{{ old('rev1') }}">
-        </div>
+     {{-- Peso 1 --}}
+<div class="form-group">
+    <label>Peso 1 (kg):</label>
+    <input type="number" name="peso1" value="{{ old('peso1') }}" step="0.01" min="0" class="form-control">
+</div>
 
-        {{-- Rev2 (fecha) --}}
-        <div class="form-group">
-            <label>Rev2:</label>
-            <input type="date" name="rev2" value="{{ old('rev2') }}">
-        </div>
+{{-- Peso 2 --}}
+<div class="form-group">
+    <label>Peso 2 (kg):</label>
+    <input type="number" name="peso2" value="{{ old('peso2') }}" step="0.01" min="0" class="form-control">
+</div>
 
-        {{-- Rev3 (fecha) --}}
-        <div class="form-group">
-            <label>Rev3:</label>
-            <input type="date" name="rev3" value="{{ old('rev3') }}">
-        </div>
-
+{{-- Peso 3 --}}
+<div class="form-group">
+    <label>Peso 3 (kg):</label>
+    <input type="number" name="peso3" value="{{ old('peso3') }}" step="0.01" min="0" class="form-control">
+</div>
         {{-- Estado (select) --}}
 {{-- Estado (select) --}}
 <div class="form-group">
@@ -677,9 +676,9 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
                     <th>Lote</th>
                     <th>Antigüedad</th>
                     <th>Destino</th>
-                    <th>Rev 1</th>
-                    <th>Rev 2</th>
-                    <th>Rev 3</th>
+                    <th>Peso 1</th>
+                    <th>Peso 2</th>
+                    <th>Peso 3</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -703,9 +702,9 @@ th:nth-child(16), td:nth-child(16) { width: 5%; min-width: 60px; } /* Acciones *
         <td>{{ \Carbon\Carbon::parse($ganado->lote)->format('d-m-Y') }}</td>
         <td>{{ $antiguedad->y }} años - {{ $antiguedad->m }} meses - {{ $antiguedad->d }} días</td>
         <td>{{ $ganado->destino }}</td>
-        <td>{{ $ganado->rev1 ? \Carbon\Carbon::parse($ganado->rev1)->format('d-m-Y') : '' }}</td>
-        <td>{{ $ganado->rev2 ? \Carbon\Carbon::parse($ganado->rev2)->format('d-m-Y') : '' }}</td>
-        <td>{{ $ganado->rev3 ? \Carbon\Carbon::parse($ganado->rev3)->format('d-m-Y') : '' }}</td>
+        <td>{{ $ganado->peso1 !== null ? number_format($ganado->peso1, 2, ',', '.') . ' kg' : '' }}</td>
+<td>{{ $ganado->peso2 !== null ? number_format($ganado->peso2, 2, ',', '.') . ' kg' : '' }}</td>
+<td>{{ $ganado->peso3 !== null ? number_format($ganado->peso3, 2, ',', '.') . ' kg' : '' }}</td>
         <td style="
     color:
         {{ $ganado->estado == 'Vendido' ? 'green' :

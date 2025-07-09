@@ -28,7 +28,7 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
         $query = Ganado::query()->select([
             'arete', 'color', 'sexo', 'subasta', 'numero_subasta',
             'peso_total', 'precio_kg', 'monto', 'lote', 'destino',
-            'rev1', 'rev2', 'rev3', 'estado'
+            'peso1', 'peso2', 'peso3', 'estado'
         ]);
 
         if ($this->destino) {
@@ -43,7 +43,7 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
         return [
             'Arete', 'Color', 'Sexo', 'Subasta', 'N° Subasta',
             'Peso Total', 'Precio por Kg', 'Monto', 'Lote', 'Antigüedad',
-            'Destino', 'Revisión 1', 'Revisión 2', 'Revisión 3', 'Estado'
+            'Destino', 'Peso 1', 'Peso 2', 'Peso 3', 'Estado'
         ];
     }
 
@@ -61,9 +61,9 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
             'I' => 14,   // Lote
             'J' => 18,   // Antigüedad
             'K' => 14,   // Destino
-            'L' => 14,   // Rev 1
-            'M' => 14,   // Rev 2
-            'N' => 14,   // Rev 3
+            'L' => 14,   // Peso 1
+            'M' => 14,   // Peso 2
+            'N' => 14,   // Peso 3
             'O' => 12    // Estado
         ];
     }
@@ -87,9 +87,9 @@ class GanadosExport implements FromCollection, WithHeadings, WithColumnWidths, S
             $ganado->lote,
             $antiguedadStr,
             $ganado->destino,
-            $ganado->rev1,
-            $ganado->rev2,
-            $ganado->rev3,
+            $ganado->peso1,
+            $ganado->peso2,
+            $ganado->peso3,
             ucfirst($ganado->estado)
         ];
     }

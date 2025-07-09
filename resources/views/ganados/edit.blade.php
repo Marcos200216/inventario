@@ -207,20 +207,21 @@
                 <input type="text" name="destino" value="{{ old('destino', $ganado->destino) }}" required>
             </div>
 
-            <div class="form-group">
-                <label>Rev1:</label>
-                <input type="date" name="rev1" value="{{ old('rev1', $ganado->rev1) }}">
-            </div>
+            
+         <div class="form-group">
+    <label>Peso 1 (kg):</label>
+    <input type="number" step="0.01" min="0" name="peso1" value="{{ old('peso1', $ganado->peso1) }}" class="form-control">
+</div>
 
-            <div class="form-group">
-                <label>Rev2:</label>
-                <input type="date" name="rev2" value="{{ old('rev2', $ganado->rev2) }}">
-            </div>
+<div class="form-group">
+    <label>Peso 2 (kg):</label>
+    <input type="number" step="0.01" min="0" name="peso2" value="{{ old('peso2', $ganado->peso2) }}" class="form-control">
+</div>
 
-            <div class="form-group">
-                <label>Rev3:</label>
-                <input type="date" name="rev3" value="{{ old('rev3', $ganado->rev3) }}">
-            </div>
+<div class="form-group">
+    <label>Peso 3 (kg):</label>
+    <input type="number" step="0.01" min="0" name="peso3" value="{{ old('peso3', $ganado->peso3) }}" class="form-control">
+</div>
 
               <div class="form-group">
     <label>Estado:</label>

@@ -341,9 +341,9 @@ th:nth-child(14), td:nth-child(14) { width: 100px; } /* Estado */
                 <th>Monto</th>
                 <th>Lote</th>
                 <th>Antigüedad</th>
-                <th>Rev 1</th>
-                <th>Rev 2</th>
-                <th>Rev 3</th>
+                <th>Peso 1</th>
+                <th>Peso 2</th>
+                <th>Peso 3</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -365,9 +365,9 @@ th:nth-child(14), td:nth-child(14) { width: 100px; } /* Estado */
             <td>₡{{ number_format($ganado->monto, 0) }}</td>
             <td>{{ \Carbon\Carbon::parse($ganado->lote)->format('d-m-Y') }}</td>
             <td>{{ $antiguedad->y }} años - {{ $antiguedad->m }} meses - {{ $antiguedad->d }} días</td>
-            <td>{{ $ganado->rev1 ? \Carbon\Carbon::parse($ganado->rev1)->format('d-m-Y') : '' }}</td>
-            <td>{{ $ganado->rev2 ? \Carbon\Carbon::parse($ganado->rev2)->format('d-m-Y') : '' }}</td>
-            <td>{{ $ganado->rev3 ? \Carbon\Carbon::parse($ganado->rev3)->format('d-m-Y') : '' }}</td>
+            <td>{{ $ganado->peso1 !== null ? number_format($ganado->peso1, 2, ',', '.') . ' kg' : '' }}</td>
+<td>{{ $ganado->peso2 !== null ? number_format($ganado->peso2, 2, ',', '.') . ' kg' : '' }}</td>
+<td>{{ $ganado->peso3 !== null ? number_format($ganado->peso3, 2, ',', '.') . ' kg' : '' }}</td>
            <td style="
     color:
         {{ $ganado->estado == 'Vendido' ? 'green' :
